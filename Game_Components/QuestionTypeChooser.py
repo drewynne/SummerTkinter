@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 
 
 class QuestionTypeChooser:
-
+    """
+        class QuestionTypeChooser:
+    """
     @staticmethod
     def choose_question_type():
         """ Set for Medium Difficulty Question Types """

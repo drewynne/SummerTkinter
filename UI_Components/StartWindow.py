@@ -11,13 +11,36 @@
 from tkinter import *
 from tkinter import ttk
 
+import logging
+
 from UI_Components.GameWindow import GameWindow
 from UI_Components.MyWindow import MyWindow
 from UI_Components.StatsWindow import StatsWindow
 
+logging.basicConfig(level=logging.DEBUG)
 
 class StartWindow(MyWindow):
-    """ Start Window Class"""
+    """
+    StartWindow is a subclass of MyWindow that represents the initial window of the application. It includes a variety of UI components and handles user interactions.
+
+    Constants:
+
+    Variables:
+
+    Objects:
+
+    UI Components:
+    - outer_frame: Outer Frame (ttk.Frame)
+    - start_button: Start Button (ttk.Button)
+    - show_stats_var: Show Stats Variable (BooleanVar)
+    - show_stats: Show stats check button (ttk.Checkbutton)
+    - difficulty_selector_label: Difficulty Selector Text Label (ttk.Label)
+    - difficulty_selector_inp: Difficulty selector spin box (ttk.Spinbox)
+    - difficulty_selector_var: Value of Difficulty Selector (IntVar)
+    - round_number_label: Round Number Label (ttk.Label)
+    - round_number_var: Round Number String Variable (StringVar)
+    - stats_button: Stats Button (ttk.Button)
+    """
     # Constants:
 
     # Variables:
@@ -93,13 +116,13 @@ class StartWindow(MyWindow):
 
     def on_press_start(self):
         """ When Start Button is Pressed """
-        print("Start Button Pressed")
+        logging.debug("Start Button Pressed")
 
         self.open_game_window()
 
     def on_press_open_stats(self):
         """ When Stats Button is Pressed """
-        print("Stats Button Pressed")
+        logging.debug("Stats Button Pressed")
         self.open_stats_window()
 
     def open_game_window(self):
@@ -114,9 +137,9 @@ class StartWindow(MyWindow):
 
     def on_end_game(self):
         """ When Exit Button is Pressed """
-        print("Exit Button Pressed")
-        print("Game Window Closed")
-        print("Saving Data...")
+        logging.debug("Exit Button Pressed")
+        logging.debug("Game Window Closed")
+        logging.debug("Saving Data...")
         # Save All Data
         # TODO: Save Data
         # Close All Windows
@@ -124,8 +147,7 @@ class StartWindow(MyWindow):
 
 
 if __name__ == '__main__':  # Test Code
-    print("Testing Start Window")
-    print()
+    logging.debug("Testing Start Window")
 
     start_window = StartWindow()
     start_window.display()

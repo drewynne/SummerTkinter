@@ -1,18 +1,20 @@
 
 
 class Question:
-    """ Question class """
+    """
+    Class representing a question with difficulty levels, text, and answer.
+    """
     # Variables
-    a: int
-    b: int
-    difficulty: int
-    question_text: str
-    answer_text: str
-    is_correct: bool
-    user_answer: str
+    num1: int # 1st Number for arithmetic question
+    num2: int # 2nd Number for arithmetic question
+    difficulty: int # difficulty variable
+    question_text: str # Text containing the question (eg. num1 + num2)
+    answer_text: str # Correct answer to the question
+    is_correct: bool # boolean for correct answer
+    user_answer: str # user's answer to question
     # Objects
 
-    def __init__(self, difficulty):
+    def __init__(self, difficulty: int):
         """ Question Constructor """
         self.difficulty = difficulty
         self.question_text = ""
@@ -32,7 +34,7 @@ class Question:
         """ Get answer text """
         return self.answer_text
 
-    def check_answer(self, user_answer):
+    def check_answer(self, user_answer) -> bool:
         """ Check if user answer is correct """
         self.user_answer = user_answer
         self.is_correct = self.answer_text == self.user_answer
@@ -41,7 +43,7 @@ class Question:
 
 if __name__ == '__main__':  # Test Code
 
-    question = Question()
+    question = Question(5)
 
     question.ask_question()
 

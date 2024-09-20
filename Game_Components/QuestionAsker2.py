@@ -10,7 +10,54 @@ from Game_Components.Question_Types.Subtraction import Subtraction
 
 
 class QuestionAsker2:
-    """ Question Asker2 Class """
+    """
+    Class for asking questions of various types and difficulties.
+
+    Attributes
+    ----------
+    user_defined_difficulty : int
+        The difficulty level defined by the user.
+    levels : list[int]
+        A list of difficulty levels for different types of questions.
+    level_selector : LevelSelector
+        An instance of the LevelSelector class for selecting difficulty levels.
+    difficulty : Difficulty
+        An instance of the Difficulty class to manage and get the difficulty level.
+    q_type : int
+        The type of the current question.
+    question : Question
+        The current question to be asked.
+    answer_is_correct : bool
+        Indicates if the last user answer was correct.
+    user_input : str
+        The user’s input for the answer.
+
+    Methods
+    -------
+    __init__(self, start_difficulty: int)
+        Constructor.
+
+    ask_question(self)
+        Ask a question based on the current difficulty and type.
+
+    set_user_input(self, user_input)
+        Set the user's input.
+
+    get_question(self)
+        Get the current question.
+
+    set_difficulty(self, difficulty: int)
+        Set the user-defined difficulty.
+
+    get_q_type(self)
+        Get the type of the question.
+
+    check_answer_is_correct(self)
+        Check if the user's answer is correct.
+
+    choose_question_type(self)
+        Choose the type of question based on difficulty.
+    """
 
     user_defined_difficulty: int
     levels: list[int]
@@ -21,13 +68,13 @@ class QuestionAsker2:
     answer_is_correct: bool
     user_input: str
 
-    def __init__(self, start_difficulty):
+    def __init__(self, start_difficulty: int):
         """ Constructor """
         self.q_type = 0 # init as addition
         self.user_defined_difficulty = start_difficulty
         self.levels = [1, 1, 1, 1]
         self.level_selector = LevelSelector()
-        self.difficulty = Difficulty()
+        self.difficulty = Difficulty(start_difficulty)
         self.levels = self.level_selector.start(start_difficulty)
         self.answer_is_correct = True
         self.question = Question(start_difficulty)
@@ -40,8 +87,8 @@ class QuestionAsker2:
         """ Ask question """
 
         q_type = self.choose_question_type()
-        difficulty = [10, 10, 10, 10]
-        self.levels = self.level_selector.update(difficulty)
+        temp_difficulty = self.difficulty.get_difficulty()
+        self.levels = self.level_selector.update(temp_difficulty)
 
         if q_type == 0:
             self.question = Addition(self.levels[0])
@@ -53,8 +100,8 @@ class QuestionAsker2:
             self.question = Division(self.levels[3])
 
         self.question.ask_question()
-        print()
-        print(self.question.get_question_text())
+        # print()
+        # print(self.question.get_question_text())
 
 
     def set_user_input(self, user_input):
@@ -64,7 +111,7 @@ class QuestionAsker2:
     def get_question(self):
         return self.question
 
-    def set_difficulty(self, difficulty):
+    def set_difficulty(self, difficulty: int):
         self.user_defined_difficulty = difficulty
 
     def get_q_type(self):
@@ -90,8 +137,9 @@ class QuestionAsker2:
 if __name__ == "__main__":
     print("Testing QuestionAsker2")
 
-    asker = QuestionAsker2(5)
-    for i in range(5):
+
+    for i in range(30):
+        asker = QuestionAsker2(i)
         asker.ask_question()
         question = asker.get_question()
         print()
